@@ -5,7 +5,8 @@
 	"main": "index.js",
 	"scripts": {
 		"wdio": "wdio run ./wdio.conf.ts",
-		"sender:login": "wdio run ./wdio.conf.ts --spec test/specs/sender/loginSender.test.ts"
+		"sender:login": "wdio run ./wdio.conf.ts --spec test/specs/sender/loginSender.test.ts",
+		"courier:login": "wdio run ./wdio.conf.ts --spec test/specs/courier/loginCourier.test.ts"
 	},
 	"keywords": [],
 	"author": "",
