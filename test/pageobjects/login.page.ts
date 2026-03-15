@@ -1,41 +1,74 @@
-import { $ } from '@wdio/globals'
-import Page from './page';
+import {
+	waitAndClick,
+	waitAndInput,
+	waitForElementToDisappear,
+	waitForElementToAppear,
+	hideKeyboard,
+} from "../helperFunctions/helperFunctions";
 
-/**
- * sub page containing specific selectors and methods for a specific page
- */
-class LoginPage extends Page {
-    /**
-     * define selectors using getter methods
-     */
-    public get inputUsername () {
-        return $('#username');
-    }
+class LoginPage {
+	private locators = {
+		emailInputField: '//android.widget.EditText[@text="Username or Email"]',
+		passwordInputField: '//android.widget.EditText[@text="Password"]',
+		loginButton: '//android.view.ViewGroup[@content-desc="Login"]',
+		forgotPasswordLink:
+			'//android.view.ViewGroup[@content-desc="Forgot Password"]',
+		sendPackageButton: '//android.view.ViewGroup[@content-desc="Send Package"]',
+		searchForDeliveriesButton:
+			'//android.view.ViewGroup[@content-desc="Search for Deliveries"]',
+	};
 
-    public get inputPassword () {
-        return $('#password');
-    }
+	async inputEmail(email: string): Promise<void> {
+		await waitAndInput(
+			await $(this.locators.emailInputField),
+			email,
+			"Email input field",
+		);
+	}
 
-    public get btnSubmit () {
-        return $('button[type="submit"]');
-    }
+	async inputPassword(password: string): Promise<void> {
+		await waitAndInput(
+			await $(this.locators.passwordInputField),
+			password,
+			"Password input field",
+		);
+	}
 
-    /**
-     * a method to encapsule automation code to interact with the page
-     * e.g. to login using username and password
-     */
-    public async login (username: string, password: string) {
-        await this.inputUsername.setValue(username);
-        await this.inputPassword.setValue(password);
-        await this.btnSubmit.click();
-    }
+	async clickLoginButton(): Promise<void> {
+		await waitAndClick(await $(this.locators.loginButton), "Login button");
+	}
 
-    /**
-     * overwrite specific options to adapt it to page object
-     */
-    public open () {
-        return super.open('login');
-    }
+	async waitForLoginToComplete(userType: "sender" | "courier"): Promise<void> {
+		await waitForElementToDisappear(
+			await $(this.locators.loginButton),
+			"Login button",
+		);
+
+		if (userType === "sender") {
+			await waitForElementToAppear(
+				await $(this.locators.sendPackageButton),
+				"Send Package button",
+			);
+		} else {
+			await waitForElementToAppear(
+				await $(this.locators.searchForDeliveriesButton),
+				"Search for Deliveries button",
+			);
+		}
+	}
+
+	async loginUser(
+		email: string,
+		password: string,
+		userType: "sender" | "courier",
+	): Promise<void> {
+		await this.inputEmail(email);
+		await hideKeyboard();
+		await this.inputPassword(password);
+		await hideKeyboard();
+		await this.clickLoginButton();
+		await this.waitForLoginToComplete(userType);
+	}
 }
 
 export default new LoginPage();
