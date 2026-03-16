@@ -9,4 +9,12 @@ describe("RouTag - Sender Login", () => {
 			"sender",
 		);
 	});
+
+	it("Should fail to login sender with invalid credentials", async () => {
+		await loginPage.loginUser(
+			process.env.SENDER_EMAIL!,
+			"Hello1234!",
+			"sender",
+		);
+	});
 });
