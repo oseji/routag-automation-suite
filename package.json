@@ -5,8 +5,10 @@
 	"main": "index.js",
 	"scripts": {
 		"wdio": "wdio run ./wdio.conf.ts",
-		"sender:login": "wdio run ./wdio.conf.ts --spec test/specs/sender/loginSender.test.ts",
-		"courier:login": "wdio run ./wdio.conf.ts --spec test/specs/courier/loginCourier.test.ts"
+		"test:sender:auth:valid-login": "wdio run ./wdio.conf.ts --spec test/specs/sender/authentication/loginWithValidCredentials.test.ts",
+		"test:sender:auth:invalid-login": "wdio run ./wdio.conf.ts --spec test/specs/sender/authentication/loginWithInvalidCredentials.test.ts",
+		"test:courier:auth:valid-login": "wdio run ./wdio.conf.ts --spec test/specs/courier/authentication/loginWithValidCredentials.test.ts",
+		"test:courier:auth:invalid-login": "wdio run ./wdio.conf.ts --spec test/specs/courier/authentication/loginWithInvalidCredentials.test.ts"
 	},
 	"keywords": [],
 	"author": "",

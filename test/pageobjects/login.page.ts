@@ -16,6 +16,8 @@ class LoginPage {
 		sendPackageButton: '//android.view.ViewGroup[@content-desc="Send Package"]',
 		searchForDeliveriesButton:
 			'//android.view.ViewGroup[@content-desc="Search for Deliveries"]',
+		invalidCredentialsToast:
+			'//android.widget.TextView[@text="Invalid Login Credentials"]',
 	};
 
 	async inputEmail(email: string): Promise<void> {
@@ -57,17 +59,19 @@ class LoginPage {
 		}
 	}
 
-	async loginUser(
-		email: string,
-		password: string,
-		userType: "sender" | "courier",
-	): Promise<void> {
+	async verifyInvalidCredentialsToast(): Promise<void> {
+		await waitForElementToAppear(
+			await $(this.locators.invalidCredentialsToast),
+			"Invalid credentials toast",
+		);
+	}
+
+	async loginUser(email: string, password: string): Promise<void> {
 		await this.inputEmail(email);
 		await hideKeyboard();
 		await this.inputPassword(password);
 		await hideKeyboard();
 		await this.clickLoginButton();
-		await this.waitForLoginToComplete(userType);
 	}
 }
 
