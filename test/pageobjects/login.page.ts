@@ -11,8 +11,8 @@ class LoginPage {
 		emailInputField: '//android.widget.EditText[@text="Username or Email"]',
 		passwordInputField: '//android.widget.EditText[@text="Password"]',
 		loginButton: '//android.view.ViewGroup[@content-desc="Login"]',
-		forgotPasswordLink:
-			'//android.view.ViewGroup[@content-desc="Forgot Password"]',
+		forgotPasswordLink: '//android.widget.TextView[@text="Forgot Password"]',
+		signUpButton: '//android.widget.TextView[@text="Sign up"]',
 		sendPackageButton: '//android.view.ViewGroup[@content-desc="Send Package"]',
 		searchForDeliveriesButton:
 			'//android.view.ViewGroup[@content-desc="Search for Deliveries"]',
@@ -64,6 +64,10 @@ class LoginPage {
 			await $(this.locators.invalidCredentialsToast),
 			"Invalid credentials toast",
 		);
+	}
+
+	async clickSignUpButton(): Promise<void> {
+		await waitAndClick($(this.locators.signUpButton), "Sign Up button");
 	}
 
 	async loginUser(email: string, password: string): Promise<void> {
