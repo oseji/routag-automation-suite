@@ -6,6 +6,7 @@ import {
 	waitForElementToAppear,
 	hideKeyboard,
 } from "../helperFunctions/helperFunctions";
+import { fetchOTPFromMailtrap } from "../helperFunctions/mailtrap";
 
 class SignUpPage {
 	private otpField(index: number) {
@@ -13,6 +14,7 @@ class SignUpPage {
 			`android=new UiSelector().className("android.widget.EditText").instance(${index})`,
 		);
 	}
+
 	private locators = {
 		chooseYourRoleHeading:
 			'//android.widget.TextView[@text="Choose Your Role"]',
@@ -82,6 +84,19 @@ class SignUpPage {
 		);
 	}
 
+	generateRandomNigerianNumber(): string {
+		const prefixes = ["070", "071", "080", "081", "090", "091"];
+
+		const randomPrefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+
+		let suffix = "";
+		for (let i = 0; i < 8; i++) {
+			suffix += Math.floor(Math.random() * 10).toString();
+		}
+
+		return `${randomPrefix}${suffix}`;
+	}
+
 	async inputPhoneNumber(phoneNumber: string): Promise<void> {
 		await waitAndInput(
 			$(this.locators.phoneNumberInputField),
@@ -148,7 +163,15 @@ class SignUpPage {
 			const field = await this.otpField(i);
 			await field.waitForDisplayed({ timeout: 10000 });
 			await field.setValue(digits[i]);
+
+			await driver.pause(500); // small pause to allow the UI to process input
 		}
+	}
+
+	async fetchAndInputOTP(): Promise<void> {
+		await this.waitForOTPVerificationScreen();
+		const otp = await fetchOTPFromMailtrap();
+		await this.inputOTP(otp);
 	}
 
 	async clickResendOTPButton(): Promise<void> {
@@ -157,6 +180,30 @@ class SignUpPage {
 
 	async clickVerifyOTPButton(): Promise<void> {
 		await waitAndClick($(this.locators.verifyOTPButton), "Verify OTP button");
+	}
+
+	async completeSenderSignUp(
+		modeOfIdentification: "NIN" | "BVN",
+	): Promise<void> {
+		const randomPhoneNumber = this.generateRandomNigerianNumber();
+
+		await this.waitForChooseYourRoleScreen();
+		await this.selectRole("sender");
+		await this.waitForSenderOnboardingScreen();
+
+		await this.inputFirstName(process.env.FIRST_NAME!);
+		await this.inputLastName(process.env.LAST_NAME!);
+		await this.inputPhoneNumber(randomPhoneNumber);
+		await this.selectModeOfIdentification(modeOfIdentification);
+		if (modeOfIdentification === "NIN") {
+			await this.inputNIN(process.env.NIN!);
+		} else {
+			await this.inputBVN(process.env.BVN!);
+		}
+		await this.inputEmail("Mf5vF@example.com");
+		await this.inputPassword(process.env.GENERAL_PASSWORD!);
+
+		await this.clickSignUpButton();
 	}
 }
 

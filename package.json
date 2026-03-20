@@ -28,5 +28,8 @@
 		"dotenv": "^17.3.1",
 		"expect-webdriverio": "^5.6.4",
 		"wdio-wait-for": "^3.1.1"
+	},
+	"dependencies": {
+		"axios": "^1.13.6"
 	}
 }
