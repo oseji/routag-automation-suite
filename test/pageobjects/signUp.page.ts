@@ -1,10 +1,7 @@
-import { verify } from "node:crypto";
 import {
     waitAndClick,
     waitAndInput,
-    waitForElementToDisappear,
     waitForElementToAppear,
-    hideKeyboard,
 } from "../helperFunctions/helperFunctions";
 import { fetchOTPFromMailtrap } from "../helperFunctions/mailtrap";
 
