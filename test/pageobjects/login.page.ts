@@ -24,7 +24,7 @@ class LoginPage {
 
     async inputEmail(email: string): Promise<void> {
         await waitAndInput(
-            await $(this.locators.emailInputField),
+            $(this.locators.emailInputField),
             email,
             "Email input field",
         );
@@ -32,32 +32,32 @@ class LoginPage {
 
     async inputPassword(password: string): Promise<void> {
         await waitAndInput(
-            await $(this.locators.passwordInputField),
+            $(this.locators.passwordInputField),
             password,
             "Password input field",
         );
     }
 
     async clickLoginButton(): Promise<void> {
-        await waitAndClick(await $(this.locators.loginButton), "Login button");
+        await waitAndClick($(this.locators.loginButton), "Login button");
     }
 
     async waitForLoginToComplete(
         userType: "sender" | "courier",
     ): Promise<void> {
         await waitForElementToDisappear(
-            await $(this.locators.loginButton),
+            $(this.locators.loginButton),
             "Login button",
         );
 
         if (userType === "sender") {
             await waitForElementToAppear(
-                await $(this.locators.sendPackageButton),
+                $(this.locators.sendPackageButton),
                 "Send Package button",
             );
         } else {
             await waitForElementToAppear(
-                await $(this.locators.searchForDeliveriesButton),
+                $(this.locators.searchForDeliveriesButton),
                 "Search for Deliveries button",
             );
         }
@@ -65,7 +65,7 @@ class LoginPage {
 
     async verifyInvalidCredentialsToast(): Promise<void> {
         await waitForElementToAppear(
-            await $(this.locators.invalidCredentialsToast),
+            $(this.locators.invalidCredentialsToast),
             "Invalid credentials toast",
         );
     }

@@ -1,9 +1,4 @@
-import {
-    waitAndClick,
-    // waitAndInput,
-    // waitForElementToDisappear,
-    // waitForElementToAppear,
-} from "../helperFunctions/helperFunctions";
+import { waitAndClick } from "../helperFunctions/helperFunctions";
 
 class appNavigationPage {
     private locators = {
@@ -20,31 +15,22 @@ class appNavigationPage {
     }
 
     async navigateToPickupScreen(): Promise<void> {
-        await waitAndClick(
-            await $(this.locators.pickupButton),
-            "Pickup button",
-        );
+        await waitAndClick($(this.locators.pickupButton), "Pickup button");
     }
 
     async navigateToDeliveriesScreen(): Promise<void> {
         await waitAndClick(
-            await $(this.locators.deliveriesButton),
+            $(this.locators.deliveriesButton),
             "Deliveries button",
         );
     }
 
     async navigateToWalletScreen(): Promise<void> {
-        await waitAndClick(
-            await $(this.locators.walletButton),
-            "Wallet button",
-        );
+        await waitAndClick($(this.locators.walletButton), "Wallet button");
     }
 
     async navigateToAccountScreen(): Promise<void> {
-        await waitAndClick(
-            await $(this.locators.accountButton),
-            "Account button",
-        );
+        await waitAndClick($(this.locators.accountButton), "Account button");
     }
 
     // async editLocationButton(): Promise<void> {

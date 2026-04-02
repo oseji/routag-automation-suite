@@ -42,15 +42,12 @@ class WalletPage {
     }
 
     async clickWithdrawButton(): Promise<void> {
-        await waitAndClick(
-            await $(this.locators.withdrawButton),
-            "Withdraw button",
-        );
+        await waitAndClick($(this.locators.withdrawButton), "Withdraw button");
     }
 
     async selectPayoutAccount(): Promise<void> {
         await waitAndClick(
-            await $(this.locators.selectedPayoutAccount),
+            $(this.locators.selectedPayoutAccount),
             "Selected payout account",
         );
     }
@@ -64,7 +61,7 @@ class WalletPage {
 
     async inputWithdrawalAmount(amount: string): Promise<void> {
         await waitAndInput(
-            await $(this.locators.withdrawalAmountInputField),
+            $(this.locators.withdrawalAmountInputField),
             amount,
             "Withdrawal amount input field",
         );
@@ -72,7 +69,7 @@ class WalletPage {
 
     async clickWithdrawalProceedButton(): Promise<void> {
         await waitAndClick(
-            await $(this.locators.withdrawalProceedButton),
+            $(this.locators.withdrawalProceedButton),
             "Withdrawal Proceed button",
         );
     }
@@ -109,7 +106,7 @@ class WalletPage {
 
     async clickTransactionPinProceedButton(): Promise<void> {
         await waitAndClick(
-            await $(this.locators.transactionPinProceedButton),
+            $(this.locators.transactionPinProceedButton),
             "Transaction PIN Proceed button",
         );
     }
