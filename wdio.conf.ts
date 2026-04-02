@@ -1,3 +1,6 @@
+import * as dotenv from "dotenv";
+dotenv.config();
+
 export const config: WebdriverIO.Config = {
     //
     // ====================
@@ -56,8 +59,7 @@ export const config: WebdriverIO.Config = {
             "appium:deviceName": "Pixel_7",
             "appium:platformVersion": "16.0",
             "appium:automationName": "UiAutomator2",
-            "appium:app":
-                "/Users/oseji/Downloads/application-d480df9a-6af7-4411-862f-96cd2ac11b24.apk",
+            "appium:app": process.env.APP_PATH!,
             "appium:noReset": true,
             "appium:autoGrantPermissions": true,
         },
