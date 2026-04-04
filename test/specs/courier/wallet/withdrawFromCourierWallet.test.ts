@@ -1,7 +1,9 @@
 import "dotenv/config";
 import loginPage from "../../../pageobjects/login.page";
 import appNavigationPage from "../../../pageobjects/appNavigation.page";
-import walletPage from "../../../pageobjects/wallet.page";
+import walletScreenPage from "../../../pageobjects/courierWallet/walletScreen.page";
+import transactionPinScreenPage from "../../../pageobjects/courierWallet/transactionPinScreen.page";
+import withdrawalScreenPage from "../../../pageobjects/courierWallet/withdrawalScreen.page";
 
 describe("Routag Courier - Withdraw Funds From Wallet", () => {
     it("Should withdraw funds from the courier wallet successfully", async () => {
@@ -13,9 +15,13 @@ describe("Routag Courier - Withdraw Funds From Wallet", () => {
 
         await appNavigationPage.navigateToWalletScreen();
 
-        await walletPage.waitForWalletToOpenAndWithdrawFunds(
-            process.env.TRANSACTION_PIN!,
+        await walletScreenPage.completeWalletScreenFlow();
+        await withdrawalScreenPage.completeWithdrawalScreenFlow(
             process.env.WITHDRAWAL_AMOUNT!,
+        );
+        await transactionPinScreenPage.completeTransactionPinScreenFlow(
+            true,
+            process.env.TRANSACTION_PIN!,
         );
     });
 });

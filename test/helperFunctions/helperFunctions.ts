@@ -63,11 +63,12 @@ const transactionPinField = (index: number) => {
 
 export const inputCode = async (
     code: string,
+    codeType: "transactionPin" | "otp",
     expectedLength: number,
 ): Promise<void> => {
     if (code.length !== expectedLength) {
         throw new Error(
-            `Code must be ${expectedLength} digits, but received ${code.length} digits instead`,
+            `${codeType === "transactionPin" ? "Transaction PIN" : "OTP"} must be ${expectedLength} digits, but received ${code.length} digits instead`,
         );
     }
 
