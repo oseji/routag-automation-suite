@@ -2,12 +2,11 @@ import { waitAndClick } from "../helperFunctions/helperFunctions";
 
 class appNavigationPage {
     private locators = {
-        homeButton: '//android.view.View[@content-desc="Home"]',
-        pickupButton: '//android.view.View[@content-desc="Pickup"]',
-        deliveriesButton: '//android.view.View[@content-desc="Deliveries"]',
-        walletButton: '//android.view.View[@content-desc="Wallet"]',
-        accountButton: '//android.view.View[@content-desc="Account"]',
-        // editLocationButton: '//android.widget.TextView[@text="Edit"]',
+        homeButton: "~Home",
+        pickupButton: "~Pickup",
+        deliveriesButton: "~Deliveries",
+        walletButton: "~Wallet",
+        accountButton: "~Account",
     };
 
     async navigateToHomeScreen(): Promise<void> {

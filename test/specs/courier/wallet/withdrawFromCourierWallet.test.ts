@@ -4,6 +4,7 @@ import appNavigationPage from "../../../pageobjects/appNavigation.page";
 import walletScreenPage from "../../../pageobjects/courierWallet/walletScreen.page";
 import transactionPinScreenPage from "../../../pageobjects/courierWallet/transactionPinScreen.page";
 import withdrawalScreenPage from "../../../pageobjects/courierWallet/withdrawalScreen.page";
+import homePage from "../../../pageobjects/home/home.page";
 
 describe("Routag Courier - Withdraw Funds From Wallet", () => {
     it("Should withdraw funds from the courier wallet successfully", async () => {
@@ -11,7 +12,7 @@ describe("Routag Courier - Withdraw Funds From Wallet", () => {
             process.env.COURIER_EMAIL!,
             process.env.GENERAL_PASSWORD!,
         );
-        await loginPage.waitForLoginToComplete("courier");
+        await homePage.waitForLoginToComplete("courier");
 
         await appNavigationPage.navigateToWalletScreen();
 

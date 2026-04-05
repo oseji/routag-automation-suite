@@ -1,5 +1,6 @@
 import "dotenv/config";
 import loginPage from "../../../pageobjects/login.page";
+import homePage from "../../../pageobjects/home/home.page";
 
 describe("RouTag Sender - Login With Valid Credentials", () => {
     it("Should login sender successfully with valid credentials", async () => {
@@ -8,6 +9,6 @@ describe("RouTag Sender - Login With Valid Credentials", () => {
             process.env.GENERAL_PASSWORD!,
         );
 
-        await loginPage.waitForLoginToComplete("sender");
+        await homePage.waitForLoginToComplete("sender");
     });
 });

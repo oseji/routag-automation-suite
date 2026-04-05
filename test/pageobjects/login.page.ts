@@ -14,10 +14,6 @@ class LoginPage {
         forgotPasswordLink:
             '//android.widget.TextView[@text="Forgot Password"]',
         signUpButton: '//android.widget.TextView[@text="Sign up"]',
-        sendPackageButton:
-            '//android.view.ViewGroup[@content-desc="Send Package"]',
-        searchForDeliveriesButton:
-            '//android.view.ViewGroup[@content-desc="Search for Deliveries"]',
         invalidCredentialsToast:
             '//android.widget.TextView[@text="Invalid Login Credentials"]',
     };
@@ -40,27 +36,6 @@ class LoginPage {
 
     async clickLoginButton(): Promise<void> {
         await waitAndClick($(this.locators.loginButton), "Login button");
-    }
-
-    async waitForLoginToComplete(
-        userType: "sender" | "courier",
-    ): Promise<void> {
-        await waitForElementToDisappear(
-            $(this.locators.loginButton),
-            "Login button",
-        );
-
-        if (userType === "sender") {
-            await waitForElementToAppear(
-                $(this.locators.sendPackageButton),
-                "Send Package button",
-            );
-        } else {
-            await waitForElementToAppear(
-                $(this.locators.searchForDeliveriesButton),
-                "Search for Deliveries button",
-            );
-        }
     }
 
     async verifyInvalidCredentialsToast(): Promise<void> {
