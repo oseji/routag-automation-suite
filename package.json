@@ -8,6 +8,7 @@
         "test:sender:auth:valid-login": "wdio run ./wdio.conf.ts --spec test/specs/sender/authentication/loginWithValidCredentials.test.ts",
         "test:sender:auth:invalid-login": "wdio run ./wdio.conf.ts --spec test/specs/sender/authentication/loginWithInvalidCredentials.test.ts",
         "test:sender:onboarding:sign-up": "wdio run ./wdio.conf.ts --spec test/specs/sender/onboarding/signUpSender.test.ts",
+        "test:sender:delivery:broadcast-delivery": "wdio run ./wdio.conf.ts --spec test/specs/sender/delivery/createDeliveryBroadcast.test.ts",
         "test:courier:auth:valid-login": "wdio run ./wdio.conf.ts --spec test/specs/courier/authentication/loginWithValidCredentials.test.ts",
         "test:courier:auth:invalid-login": "wdio run ./wdio.conf.ts --spec test/specs/courier/authentication/loginWithInvalidCredentials.test.ts",
         "test:courier:wallet:withdraw-funds": "wdio run ./wdio.conf.ts --spec test/specs/courier/wallet/withdrawFromCourierWallet.test.ts",

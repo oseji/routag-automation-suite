@@ -22,6 +22,8 @@ class DeliveryRoutePage {
         productValueInputField:
             'android=new UiSelector().text("Product value in naira")',
         uploadProductImageButton: "~Click here to upload product image ",
+        selectedImage:
+            'android=new UiSelector().resourceId("com.google.android.documentsui:id/icon_thumb")',
         successfulImageUploadMessage:
             '//android.widget.TextView[@text="Image uploaded successfully"]',
         findCourierButton: "~Find Courier",
@@ -92,6 +94,13 @@ class DeliveryRoutePage {
         );
     }
 
+    async clickSelectedImage(): Promise<void> {
+        await waitAndClick(
+            $(this.locators.selectedImage),
+            "Selected image from gallery",
+        );
+    }
+
     async verifySuccessfulImageUploadMessage(): Promise<void> {
         await waitForElementToAppear(
             $(this.locators.successfulImageUploadMessage),
@@ -121,6 +130,7 @@ class DeliveryRoutePage {
         await this.inputReceiversPhoneNumber(receiversPhoneNumber);
         await this.inputProductValue(productValue);
         await this.clickUploadProductImageButton();
+        await this.clickSelectedImage();
         await this.verifySuccessfulImageUploadMessage();
         await this.clickFindCourierButton();
     }

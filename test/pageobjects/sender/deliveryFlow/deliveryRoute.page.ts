@@ -8,6 +8,8 @@ class DeliveryRoutePage {
     private locators = {
         deliveryRoutePageHeading:
             'android=new UiSelector().text("Set Delivery Route")',
+        clearDestinationLocationButton:
+            'android=new UiSelector().className("com.horcrux.svg.PathView").instance(5)',
         clearPickupLocationButton:
             'android=new UiSelector().className("com.horcrux.svg.PathView").instance(3)',
         pickupLocationInputField:
@@ -30,6 +32,13 @@ class DeliveryRoutePage {
         await waitAndClick(
             $(this.locators.clearPickupLocationButton),
             "Clear pickup location button",
+        );
+    }
+
+    async clickClearDestinationLocationButton(): Promise<void> {
+        await waitAndClick(
+            $(this.locators.clearDestinationLocationButton),
+            "Clear destination location button",
         );
     }
 
@@ -69,6 +78,7 @@ class DeliveryRoutePage {
     ): Promise<void> {
         await this.waitForDeliveryRoutePageToLoad();
         await this.clickClearPickupLocationButton();
+        await this.clickClearDestinationLocationButton();
         await this.inputPickupLocation(pickupLocation);
         await this.selectPickupLocation();
         await this.inputDestinationLocation(destinationLocation);

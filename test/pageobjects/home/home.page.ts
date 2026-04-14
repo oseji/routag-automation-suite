@@ -1,9 +1,4 @@
-import {
-    waitAndClick,
-    waitAndInput,
-    waitForElementToDisappear,
-    waitForElementToAppear,
-} from "../../helperFunctions/helperFunctions";
+import { waitForElementToAppear } from "../../helperFunctions/helperFunctions";
 
 class HomePage {
     private locators = {
@@ -26,6 +21,22 @@ class HomePage {
                 "Search for Deliveries button",
             );
         }
+    }
+
+    async clickSendPackageButton(): Promise<void> {
+        await waitForElementToAppear(
+            $(this.locators.sendPackageButton),
+            "Send Package button",
+        );
+        await $(this.locators.sendPackageButton).click();
+    }
+
+    async clickSearchForDeliveriesButton(): Promise<void> {
+        await waitForElementToAppear(
+            $(this.locators.searchForDeliveriesButton),
+            "Search for Deliveries button",
+        );
+        await $(this.locators.searchForDeliveriesButton).click();
     }
 }
 

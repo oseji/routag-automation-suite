@@ -1,4 +1,4 @@
-const getTimeout = () => parseInt(process.env.TIMEOUT || "60000");
+const getTimeout = () => parseInt(process.env.TIMEOUT || "90000");
 
 export const waitAndClick = async (
     element: ChainablePromiseElement,
