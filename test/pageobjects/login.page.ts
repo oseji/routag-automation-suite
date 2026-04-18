@@ -10,7 +10,7 @@ class LoginPage {
     private locators = {
         emailInputField: '//android.widget.EditText[@text="Email"]',
         passwordInputField: '//android.widget.EditText[@text="Password"]',
-        loginButton: '//android.view.ViewGroup[@content-desc="Login"]',
+        loginButton: "~Login",
         forgotPasswordLink:
             '//android.widget.TextView[@text="Forgot Password"]',
         signUpButton: '//android.widget.TextView[@text="Sign up"]',
