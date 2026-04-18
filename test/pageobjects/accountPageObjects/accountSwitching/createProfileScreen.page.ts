@@ -16,7 +16,7 @@ class CreateProfileScreen {
         uploadutilityBillButton:
             'android=new UiSelector().text("Select an image")',
         utilityBillImage:
-            'android=new UiSelector().resourceId("com.google.android.documentsui:id/icon_thumb").instance(1)',
+            'android=new UiSelector().resourceId("com.google.android.documentsui:id/icon_thumb").instance(0)',
         proceedButton: "~Proceed",
     };
 

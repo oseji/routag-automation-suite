@@ -96,7 +96,26 @@ class accountPage {
         role: "Sender" | "Courier",
     ): Promise<boolean> {
         try {
-            await this.waitForTryingToSwitchModalToAppear(role);
+            await $(
+                this.accountSwitchingLocators.tryingToSwitchModalHeading,
+            ).waitForDisplayed({ timeout: 5000 });
+            if (role === "Sender") {
+                await waitForElementToAppear(
+                    $(
+                        this.accountSwitchingLocators
+                            .tryingToSwitchToSenderProfileModalMessage,
+                    ),
+                    "Trying to switch to sender profile modal message",
+                );
+            } else if (role === "Courier") {
+                await waitForElementToAppear(
+                    $(
+                        this.accountSwitchingLocators
+                            .tryingToSwitchToCourierProfileModalMessage,
+                    ),
+                    "Trying to switch to courier profile modal message",
+                );
+            }
             return true;
         } catch {
             return false;
