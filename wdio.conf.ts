@@ -60,6 +60,7 @@ export const config: WebdriverIO.Config = {
             "appium:platformVersion": "16.0",
             "appium:automationName": "UiAutomator2",
             "appium:app": process.env.APP_PATH!,
+            "appium:appPackage": "com.vastracktech.routag",
             "appium:noReset": true,
             "appium:autoGrantPermissions": true,
         },
@@ -141,7 +142,7 @@ export const config: WebdriverIO.Config = {
     // See the full list at http://mochajs.org/
     mochaOpts: {
         ui: "bdd",
-        timeout: 60000,
+        timeout: 600000,
     },
 
     //

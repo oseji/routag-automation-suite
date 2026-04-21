@@ -2,6 +2,7 @@ import {
     waitAndClick,
     waitAndInput,
     waitForElementToAppear,
+    scrollToElement,
 } from "../../../helperFunctions/helperFunctions";
 
 class DeliveryRoutePage {
@@ -126,12 +127,22 @@ class DeliveryRoutePage {
         await this.inputPackageWeight(weight);
         await this.inputPackageDescription(description);
         await this.selectPackageClassification();
+
+        await scrollToElement($(this.locators.receiversNameInputField));
         await this.inputReceiversName(receiversName);
+
+        await scrollToElement($(this.locators.receiversPhoneNumberInputField));
         await this.inputReceiversPhoneNumber(receiversPhoneNumber);
+
+        await scrollToElement($(this.locators.productValueInputField));
         await this.inputProductValue(productValue);
+
+        await scrollToElement($(this.locators.uploadProductImageButton));
         await this.clickUploadProductImageButton();
         await this.clickSelectedImage();
         await this.verifySuccessfulImageUploadMessage();
+
+        await scrollToElement($(this.locators.findCourierButton));
         await this.clickFindCourierButton();
     }
 }

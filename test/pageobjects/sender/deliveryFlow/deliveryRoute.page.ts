@@ -9,9 +9,9 @@ class DeliveryRoutePage {
         deliveryRoutePageHeading:
             'android=new UiSelector().text("Set Delivery Route")',
         clearDestinationLocationButton:
-            'android=new UiSelector().className("com.horcrux.svg.PathView").instance(5)',
+            '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup[6]/com.horcrux.svg.SvgView',
         clearPickupLocationButton:
-            'android=new UiSelector().className("com.horcrux.svg.PathView").instance(3)',
+            '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup[3]',
         pickupLocationInputField:
             'android=new UiSelector().text("Enter source address")',
         destinationLocationInputField:
@@ -77,11 +77,26 @@ class DeliveryRoutePage {
         destinationLocation: string,
     ): Promise<void> {
         await this.waitForDeliveryRoutePageToLoad();
-        await this.clickClearPickupLocationButton();
-        await this.clickClearDestinationLocationButton();
+
+        // clear both pickup and destination fields upfront if pre-filled
+        const clearPickup = $(this.locators.clearPickupLocationButton);
+        if (await clearPickup.isExisting()) {
+            await this.clickClearPickupLocationButton();
+        }
+
+        const clearDestination = $(
+            this.locators.clearDestinationLocationButton,
+        );
+        if (await clearDestination.isExisting()) {
+            await this.clickClearDestinationLocationButton();
+        }
+
         await this.inputPickupLocation(pickupLocation);
+        await driver.pause(2000); // Pause to allow location suggestions to load
         await this.selectPickupLocation();
+
         await this.inputDestinationLocation(destinationLocation);
+        await driver.pause(2000); // Pause to allow location suggestions to load
         await this.selectDestinationLocation();
     }
 }

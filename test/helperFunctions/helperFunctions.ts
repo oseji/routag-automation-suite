@@ -1,5 +1,21 @@
 const getTimeout = () => parseInt(process.env.TIMEOUT || "90000");
 
+export async function scrollToElement(
+    element: ChainablePromiseElement,
+): Promise<void> {
+    const isDisplayed = await element.isDisplayed().catch(() => false);
+    if (!isDisplayed) {
+        await driver.execute("mobile: scrollGesture", {
+            left: 100,
+            top: 300,
+            width: 300,
+            height: 600,
+            direction: "down",
+            percent: 0.5,
+        });
+    }
+}
+
 export const waitAndClick = async (
     element: ChainablePromiseElement,
     elementDescription: string,

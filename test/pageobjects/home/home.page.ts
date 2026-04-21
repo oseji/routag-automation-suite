@@ -10,6 +10,8 @@ class HomePage {
     async waitForLoginToComplete(
         userType: "sender" | "courier",
     ): Promise<void> {
+        await driver.pause(5000); // Pause to allow any loading after login to complete
+
         if (userType === "sender") {
             await waitForElementToAppear(
                 $(this.locators.sendPackageButton),
