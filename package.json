@@ -35,7 +35,7 @@
     "@wdio/mocha-framework": "^9.27.0",
     "@wdio/spec-reporter": "^9.25.0",
     "appium": "^3.2.2",
-    "appium-uiautomator2-driver": "^7.1.0",
+    "appium-uiautomator2-driver": "^7.1.2",
     "dotenv": "^17.3.1",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.1.8",
